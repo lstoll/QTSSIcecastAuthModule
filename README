@@ -1,0 +1,27 @@
+WARNING: This code is a testing prototype, so is bad and has
+buffer overflows and will cause the world to end.
+
+This is the auth module for qtss auth and dss
+
+Sample configuration:
+
+<MODULE NAME="QTSSIcecastAuthModule" >
+    <PREF NAME="enabled" TYPE="Bool16" >true</PREF>
+    <PREF NAME="IPBypassList">127.0.0.*</PREF>
+    <PREF NAME="StartSessionEndpoint">http://server/stream_auth/start_session</PREF>
+    <PREF NAME="EndSessionEndpoint">http://server/stream_auth/end_session</PREF>
+</MODULE>
+
+For multiple IPs, set the list to something like this:
+
+<LIST-PREF NAME="IPBypassList" >
+    <VALUE>127.0.0.*</VALUE>
+    <VALUE>10.16.248.*</VALUE>
+</LIST-PREF>
+
+When the server rejects the module as being not valid, run this on the server:
+
+g++ -ldl mod_load_test.c && ./a.out
+
+This will build and run a tester app that will try to load the module - this will
+report any errors while loading (mostly unresolved symbols)
